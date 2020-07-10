@@ -1,17 +1,17 @@
 import java.util.Random;
 import java.util.Scanner;
 public class TicTacToe {
-
-    public static char[][] map;
-    public static int SIZE = 5;
-    public static int DOTS_TO_WIN = 4;
-
-    public static final char DOT_EMPTY = '•';
-    public static final char DOT_X = 'X';
-    public static final char DOT_O = 'O';
-
     public static Scanner sc = new Scanner(System.in);
     public static Random rand = new Random();
+
+    public static char[][] map;
+    public final static int SIZE = 5;
+    public final static int DOTS_TO_WIN = 4;
+
+    public final static char DOT_EMPTY = '•';
+    public final static char DOT_X = 'X';
+    public final static char DOT_O = 'O';
+
 
     public static void main(String[] args) {
         game();
@@ -89,12 +89,14 @@ public class TicTacToe {
 
     //проверка на ничью
     private static boolean isMapFull() {
+        int count = 0;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if (map[i][j] == DOT_EMPTY) return false;
+                if (map[i][j] == DOT_EMPTY)
+                    count++;
             }
         }
-        return true;
+        return count == 0;
     }
 
 
@@ -103,128 +105,107 @@ public class TicTacToe {
         int x, y;
 
             //действия компьютера по одной главной диагонали
-            if (map[0][0] == DOT_X && map[1][1] == DOT_X && map[2][2] == DOT_X ||
-                    map[1][1] == DOT_X && map[2][2] == DOT_X && map[4][4] == DOT_X) {
-                 x = 3;
-                 y = 3;
+            if (map[1][1] == DOT_X && map[2][2] == DOT_X && map[3][3] == DOT_X ||
+                    map[2][2] == DOT_X && map[3][3] == DOT_X && map[5][5] == DOT_X) {
+                 x = 4;
+                 y = 4;
                 map[x][y] = DOT_O;
             }
-            if (map[0][0] == DOT_X && map[2][2] == DOT_X && map[3][3] == DOT_X ||
-                    map[2][2] == DOT_X &&  map[3][3] == DOT_X && map[4][4] == DOT_X) {
-                x = 1;
-                y = 1;
-                map[x][y] = DOT_O;
-            }
-            if (map[0][0] == DOT_X && map[1][1] == DOT_X && map[3][3] == DOT_X ||
-                    map[1][1] == DOT_X &&  map[3][3] == DOT_X && map[4][4] == DOT_X) {
+            if (map[1][1] == DOT_X && map[3][3] == DOT_X && map[4][4] == DOT_X ||
+                    map[3][3] == DOT_X &&  map[4][4] == DOT_X && map[5][5] == DOT_X) {
                 x = 2;
                 y = 2;
                 map[x][y] = DOT_O;
             }
-            if (map[1][1] == DOT_X && map[2][2] == DOT_X && map[3][3] == DOT_X) {
-                if (map[4][4] != DOT_EMPTY) {
-                    x = 0;
-                    y = 0;
+            if (map[1][1] == DOT_X && map[2][2] == DOT_X && map[4][4] == DOT_X ||
+                    map[2][2] == DOT_X &&  map[4][4] == DOT_X && map[5][5] == DOT_X) {
+                x = 3;
+                y = 3;
+                map[x][y] = DOT_O;
+            }
+            if (map[2][2] == DOT_X && map[3][3] == DOT_X && map[4][4] == DOT_X) {
+                if (map[5][5] != DOT_EMPTY) {
+                    x = 1;
+                    y = 1;
                 } else {
-                    x = 4;
-                    y = 4;
+                    x = 5;
+                    y = 5;
                 }
                 map[x][y] = DOT_O;
             }
             //действия компьютера по другой главной диагонали
-            if (map[0][4] == DOT_X && map[1][3] == DOT_X && map[2][2] == DOT_X ||
-                    map[1][3] == DOT_X && map[2][2] == DOT_X && map[4][0] == DOT_X) {
-                x = 3;
-                y = 1;
-                map[x][y] = DOT_O;
-            }
-            if (map[0][4] == DOT_X && map[2][2] == DOT_X && map[3][1] == DOT_X ||
-                    map[2][2] == DOT_X &&  map[3][1] == DOT_X && map[4][0] == DOT_X) {
-                x = 1;
-                y = 3;
-                map[x][y] = DOT_O;
-            }
-            if (map[0][4] == DOT_X && map[1][3] == DOT_X && map[3][1] == DOT_X ||
-                    map[1][3] == DOT_X &&  map[3][1] == DOT_X && map[4][0] == DOT_X) {
-                x = 2;
+            if (map[1][5] == DOT_X && map[2][4] == DOT_X && map[3][3] == DOT_X ||
+                    map[2][4] == DOT_X && map[3][3] == DOT_X && map[5][1] == DOT_X) {
+                x = 4;
                 y = 2;
                 map[x][y] = DOT_O;
             }
-            if (map[1][3] == DOT_X && map[2][2] == DOT_X && map[3][1] == DOT_X) {
-                if (map[4][0] != DOT_EMPTY) {
-                    x = 0;
-                    y = 4;
+            if (map[1][5] == DOT_X && map[3][3] == DOT_X && map[4][2] == DOT_X ||
+                    map[3][3] == DOT_X &&  map[4][2] == DOT_X && map[5][1] == DOT_X) {
+                x = 2;
+                y = 4;
+                map[x][y] = DOT_O;
+            }
+            if (map[1][5] == DOT_X && map[2][4] == DOT_X && map[4][2] == DOT_X ||
+                    map[2][4] == DOT_X &&  map[4][2] == DOT_X && map[5][1] == DOT_X) {
+                x = 3;
+                y = 3;
+                map[x][y] = DOT_O;
+            }
+            if (map[2][4] == DOT_X && map[3][3] == DOT_X && map[4][2] == DOT_X) {
+                if (map[5][1] != DOT_EMPTY) {
+                    x = 1;
+                    y = 5;
                 } else {
-                x = 4;
-                y = 0;
+                x = 5;
+                y = 1;
                 }
                 map[x][y] = DOT_O;
             }
             //действия компьютера по 1 малой диагонали
-            if (map[2][1] == DOT_X && map[3][2] == DOT_X && map[4][3] == DOT_X) {
-                x = 1;
-                y = 0;
-                map[x][y] = DOT_O;
-            }
-            if (map[1][0] == DOT_X && map[3][2] == DOT_X && map[4][3] == DOT_X) {
+            if (map[3][2] == DOT_X && map[4][3] == DOT_X && map[5][4] == DOT_X) {
                 x = 2;
                 y = 1;
                 map[x][y] = DOT_O;
             }
-            if (map[1][0] == DOT_X && map[2][1] == DOT_X && map[4][3] == DOT_X) {
+            if (map[2][1] == DOT_X && map[4][3] == DOT_X && map[5][4] == DOT_X) {
                 x = 3;
                 y = 2;
                 map[x][y] = DOT_O;
             }
-            if (map[1][0] == DOT_X && map[2][1] == DOT_X && map[3][2] == DOT_X) {
+            if (map[2][1] == DOT_X && map[3][2] == DOT_X && map[5][4] == DOT_X) {
                 x = 4;
                 y = 3;
                 map[x][y] = DOT_O;
             }
-            //действия компьютера по 2 малой диагонали
-            if (map[1][2] == DOT_X && map[2][3] == DOT_X && map[3][4] == DOT_X) {
-                x = 0;
-                y = 1;
+            if (map[2][1] == DOT_X && map[3][2] == DOT_X && map[4][3] == DOT_X) {
+                x = 5;
+                y = 4;
                 map[x][y] = DOT_O;
             }
-            if (map[0][1] == DOT_X && map[2][3] == DOT_X && map[3][4] == DOT_X) {
+            //действия компьютера по 2 малой диагонали
+            if (map[2][3] == DOT_X && map[3][4] == DOT_X && map[4][5] == DOT_X) {
                 x = 1;
                 y = 2;
                 map[x][y] = DOT_O;
             }
-            if (map[0][1] == DOT_X && map[1][2] == DOT_X && map[3][4] == DOT_X) {
+            if (map[1][2] == DOT_X && map[3][4] == DOT_X && map[4][5] == DOT_X) {
                 x = 2;
                 y = 3;
                 map[x][y] = DOT_O;
             }
-            if (map[0][1] == DOT_X && map[1][2] == DOT_X && map[2][3] == DOT_X) {
+            if (map[1][2] == DOT_X && map[2][3] == DOT_X && map[4][5] == DOT_X) {
                 x = 3;
                 y = 4;
                 map[x][y] = DOT_O;
             }
+            if (map[1][2] == DOT_X && map[2][3] == DOT_X && map[3][4] == DOT_X) {
+                x = 4;
+                y = 5;
+                map[x][y] = DOT_O;
+            }
             //действия компьютера по 3 малой диагонали
-            if (map[1][2] == DOT_X && map[2][1] == DOT_X && map[3][0] == DOT_X) {
-                x = 0;
-                y = 3;
-                map[x][y] = DOT_O;
-            }
-            if (map[0][3] == DOT_X && map[2][1] == DOT_X && map[3][0] == DOT_X) {
-                x = 1;
-                y = 2;
-                map[x][y] = DOT_O;
-            }
-            if (map[0][3] == DOT_X && map[1][2] == DOT_X && map[3][0] == DOT_X) {
-                x = 2;
-                y = 1;
-                map[x][y] = DOT_O;
-            }
-            if (map[0][3] == DOT_X && map[1][2] == DOT_X && map[2][1] == DOT_X) {
-                x = 3;
-                y = 0;
-                map[x][y] = DOT_O;
-            }
-            //действия компьютера по 4 малой диагонали
-            if (map[2][3] == DOT_X && map[3][2] == DOT_X && map[4][1] == DOT_X) {
+            if (map[2][3] == DOT_X && map[3][4] == DOT_X && map[4][1] == DOT_X) {
                 x = 1;
                 y = 4;
                 map[x][y] = DOT_O;
@@ -244,287 +225,308 @@ public class TicTacToe {
                 y = 1;
                 map[x][y] = DOT_O;
             }
+            //действия компьютера по 4 малой диагонали
+            if (map[3][4] == DOT_X && map[4][3] == DOT_X && map[5][2] == DOT_X) {
+                x = 2;
+                y = 5;
+                map[x][y] = DOT_O;
+            }
+            if (map[2][5] == DOT_X && map[4][3] == DOT_X && map[5][2] == DOT_X) {
+                x = 3;
+                y = 4;
+                map[x][y] = DOT_O;
+            }
+            if (map[2][5] == DOT_X && map[3][4] == DOT_X && map[5][2] == DOT_X) {
+                x = 4;
+                y = 3;
+                map[x][y] = DOT_O;
+            }
+            if (map[2][5] == DOT_X && map[3][4] == DOT_X && map[4][3] == DOT_X) {
+                x = 5;
+                y = 2;
+                map[x][y] = DOT_O;
+            }
             //действия компьютера по вертикали
             //1
-            if (map[1][0] == DOT_X && map[2][0] == DOT_X && map[3][0] == DOT_X) {
-                if (map[0][0] != DOT_EMPTY) {
-                    x = 4;
+            if (map[2][1] == DOT_X && map[3][1] == DOT_X && map[4][1] == DOT_X) {
+                if (map[1][1] != DOT_EMPTY) {
+                    x = 5;
                 } else {
-                    x = 0;
+                    x = 1;
                 }
-                y = 0;
+                y = 1;
                 map[x][y] = DOT_O;
             }
-            if (map[0][0] == DOT_X && map[2][0] == DOT_X && map[3][0] == DOT_X ||
-                    map[2][0] == DOT_X && map[3][0] == DOT_X && map[4][0] == DOT_X) {
-                x = 1;
-                y = 0;
-                map[x][y] = DOT_O;
-            }
-            if (map[0][0] == DOT_X && map[1][0] == DOT_X && map[3][0] == DOT_X ||
-                    map[1][0] == DOT_X && map[3][0] == DOT_X && map[4][0] == DOT_X) {
+            if (map[1][1] == DOT_X && map[3][1] == DOT_X && map[4][1] == DOT_X ||
+                    map[3][1] == DOT_X && map[4][1] == DOT_X && map[5][1] == DOT_X) {
                 x = 2;
-                y = 0;
+                y = 1;
+                map[x][y] = DOT_O;
+            }
+            if (map[1][1] == DOT_X && map[2][1] == DOT_X && map[4][1] == DOT_X ||
+                    map[2][1] == DOT_X && map[4][1] == DOT_X && map[5][1] == DOT_X) {
+                x = 3;
+                y = 1;
                 map[x][y] = DOT_O;
         }
-        if (map[0][0] == DOT_X && map[1][0] == DOT_X && map[2][0] == DOT_X ||
-                map[1][0] == DOT_X && map[2][0] == DOT_X && map[4][0] == DOT_X) {
-            x = 3;
-            y = 0;
+        if (map[1][1] == DOT_X && map[2][1] == DOT_X && map[3][1] == DOT_X ||
+                map[2][1] == DOT_X && map[3][1] == DOT_X && map[5][1] == DOT_X) {
+            x = 4;
+            y = 1;
             map[x][y] = DOT_O;
         }
         //2
-        if (map[1][1] == DOT_X && map[2][1] == DOT_X && map[3][1] == DOT_X) {
-            if (map[0][1] != DOT_EMPTY) {
-                x = 4;
+        if (map[2][2] == DOT_X && map[3][2] == DOT_X && map[4][4] == DOT_X) {
+            if (map[1][2] != DOT_EMPTY) {
+                x = 5;
             } else {
-                x = 0;
+                x = 1;
             }
-            y = 1;
+            y = 2;
             map[x][y] = DOT_O;
         }
-        if (map[0][1] == DOT_X && map[2][1] == DOT_X && map[3][1] == DOT_X ||
-                map[2][1] == DOT_X && map[3][1] == DOT_X && map[4][1] == DOT_X) {
-            x = 1;
-            y = 1;
-            map[x][y] = DOT_O;
-        }
-        if (map[0][1] == DOT_X && map[1][1] == DOT_X && map[3][1] == DOT_X ||
-                map[1][1] == DOT_X && map[3][1] == DOT_X && map[4][1] == DOT_X) {
+        if (map[1][2] == DOT_X && map[3][2] == DOT_X && map[4][2] == DOT_X ||
+                map[3][2] == DOT_X && map[4][2] == DOT_X && map[5][2] == DOT_X) {
             x = 2;
-            y = 1;
+            y = 2;
             map[x][y] = DOT_O;
         }
-        if (map[0][1] == DOT_X && map[1][1] == DOT_X && map[2][1] == DOT_X ||
-                map[1][1] == DOT_X && map[2][1] == DOT_X && map[4][1] == DOT_X) {
+        if (map[1][2] == DOT_X && map[2][2] == DOT_X && map[4][2] == DOT_X ||
+                map[2][2] == DOT_X && map[4][2] == DOT_X && map[5][2] == DOT_X) {
             x = 3;
-            y = 1;
+            y = 2;
+            map[x][y] = DOT_O;
+        }
+        if (map[1][2] == DOT_X && map[2][2] == DOT_X && map[3][2] == DOT_X ||
+                map[2][2] == DOT_X && map[3][2] == DOT_X && map[5][2] == DOT_X) {
+            x = 4;
+            y = 2;
             map[x][y] = DOT_O;
         }
         //3
-        if (map[1][2] == DOT_X && map[2][2] == DOT_X && map[3][2] == DOT_X) {
-            if (map[0][2] != DOT_EMPTY) {
-                x = 4;
+        if (map[2][3] == DOT_X && map[3][3] == DOT_X && map[4][3] == DOT_X) {
+            if (map[1][3] != DOT_EMPTY) {
+                x = 5;
             } else {
-                x = 0;
+                x = 1;
             }
-            y = 2;
+            y = 3;
             map[x][y] = DOT_O;
         }
-        if (map[0][2] == DOT_X && map[2][2] == DOT_X && map[3][2] == DOT_X ||
-                map[2][2] == DOT_X && map[3][2] == DOT_X && map[4][2] == DOT_X) {
-            x = 1;
-            y = 2;
-            map[x][y] = DOT_O;
-        }
-        if (map[0][2] == DOT_X && map[1][2] == DOT_X && map[3][2] == DOT_X ||
-                map[1][2] == DOT_X && map[3][2] == DOT_X && map[4][2] == DOT_X) {
+        if (map[1][3] == DOT_X && map[3][3] == DOT_X && map[4][3] == DOT_X ||
+                map[3][3] == DOT_X && map[4][3] == DOT_X && map[5][3] == DOT_X) {
             x = 2;
-            y = 2;
+            y = 3;
             map[x][y] = DOT_O;
         }
-        if (map[0][2] == DOT_X && map[1][2] == DOT_X && map[2][2] == DOT_X ||
-                map[1][2] == DOT_X && map[2][2] == DOT_X && map[4][2] == DOT_X) {
+        if (map[1][3] == DOT_X && map[2][3] == DOT_X && map[4][3] == DOT_X ||
+                map[2][3] == DOT_X && map[4][3] == DOT_X && map[5][3] == DOT_X) {
             x = 3;
-            y = 2;
+            y = 3;
+            map[x][y] = DOT_O;
+        }
+        if (map[1][3] == DOT_X && map[2][3] == DOT_X && map[3][3] == DOT_X ||
+                map[2][3] == DOT_X && map[3][3] == DOT_X && map[5][3] == DOT_X) {
+            x = 4;
+            y = 3;
             map[x][y] = DOT_O;
         }
         //4
-        if (map[1][3] == DOT_X && map[2][3] == DOT_X && map[3][3] == DOT_X) {
-            if (map[0][3] != DOT_EMPTY) {
-                x = 4;
+        if (map[2][4] == DOT_X && map[3][4] == DOT_X && map[4][4] == DOT_X) {
+            if (map[1][4] != DOT_EMPTY) {
+                x = 5;
             } else {
-                x = 0;
+                x = 1;
             }
-            y = 3;
+            y = 4;
             map[x][y] = DOT_O;
         }
-        if (map[0][3] == DOT_X && map[2][3] == DOT_X && map[3][3] == DOT_X ||
-                map[2][3] == DOT_X && map[3][3] == DOT_X && map[4][3] == DOT_X) {
-            x = 1;
-            y = 3;
-            map[x][y] = DOT_O;
-        }
-        if (map[0][3] == DOT_X && map[1][3] == DOT_X && map[3][3] == DOT_X ||
-                map[1][3] == DOT_X && map[3][3] == DOT_X && map[4][3] == DOT_X) {
+        if (map[1][4] == DOT_X && map[3][4] == DOT_X && map[4][4] == DOT_X ||
+                map[3][4] == DOT_X && map[4][4] == DOT_X && map[5][4] == DOT_X) {
             x = 2;
-            y = 3;
+            y = 4;
             map[x][y] = DOT_O;
         }
-        if (map[0][3] == DOT_X && map[1][3] == DOT_X && map[2][3] == DOT_X ||
-                map[1][3] == DOT_X && map[2][3] == DOT_X && map[4][3] == DOT_X) {
+        if (map[1][4] == DOT_X && map[2][4] == DOT_X && map[4][4] == DOT_X ||
+                map[2][4] == DOT_X && map[4][4] == DOT_X && map[5][4] == DOT_X) {
             x = 3;
-            y = 3;
+            y = 4;
+            map[x][y] = DOT_O;
+        }
+        if (map[1][4] == DOT_X && map[2][4] == DOT_X && map[3][4] == DOT_X ||
+                map[2][4] == DOT_X && map[3][4] == DOT_X && map[5][4] == DOT_X) {
+            x = 4;
+            y = 4;
             map[x][y] = DOT_O;
         }
         //5
-        if (map[1][4] == DOT_X && map[2][4] == DOT_X && map[3][4] == DOT_X) {
-            if (map[0][4] != DOT_EMPTY) {
-                x = 4;
+        if (map[2][5] == DOT_X && map[3][5] == DOT_X && map[4][5] == DOT_X) {
+            if (map[1][5] != DOT_EMPTY) {
+                x = 5;
             } else {
-                x = 0;
+                x = 1;
             }
-            y = 4;
+            y = 5;
             map[x][y] = DOT_O;
         }
-        if (map[0][4] == DOT_X && map[2][4] == DOT_X && map[3][4] == DOT_X ||
-                map[2][4] == DOT_X && map[3][4] == DOT_X && map[4][4] == DOT_X) {
-            x = 1;
-            y = 4;
+        if (map[1][5] == DOT_X && map[3][5] == DOT_X && map[4][5] == DOT_X ||
+                map[3][5] == DOT_X && map[4][5] == DOT_X && map[5][5] == DOT_X) {
+            x = 5;
+            y = 5;
             map[x][y] = DOT_O;
         }
-        if (map[0][4] == DOT_X && map[1][4] == DOT_X && map[3][4] == DOT_X ||
-                map[1][4] == DOT_X && map[3][4] == DOT_X && map[4][4] == DOT_X) {
-            x = 2;
-            y = 4;
-            map[x][y] = DOT_O;
-        }
-        if (map[0][4] == DOT_X && map[1][4] == DOT_X && map[2][4] == DOT_X ||
-                map[1][4] == DOT_X && map[2][4] == DOT_X && map[4][4] == DOT_X) {
+        if (map[1][5] == DOT_X && map[2][5] == DOT_X && map[4][5] == DOT_X ||
+                map[2][5] == DOT_X && map[4][5] == DOT_X && map[5][5] == DOT_X) {
             x = 3;
-            y = 4;
+            y = 5;
+            map[x][y] = DOT_O;
+        }
+        if (map[1][5] == DOT_X && map[2][5] == DOT_X && map[3][5] == DOT_X ||
+                map[2][5] == DOT_X && map[3][5] == DOT_X && map[5][5] == DOT_X) {
+            x = 4;
+            y = 5;
             map[x][y] = DOT_O;
         }
 
         //действия компьютера по горизонтали
         //1
-        if (map[0][1] == DOT_X && map[0][2] == DOT_X && map[0][3] == DOT_X) {
-            if (map[0][0] != DOT_EMPTY) {
-                y = 4;
+        if (map[1][2] == DOT_X && map[1][3] == DOT_X && map[1][4] == DOT_X) {
+            if (map[1][1] != DOT_EMPTY) {
+                y = 5;
             } else {
-                y = 0;
+                y = 1;
             }
-            x = 0;
+            x = 1;
             map[x][y] = DOT_O;
         }
-        if (map[0][0] == DOT_X && map[0][2] == DOT_X && map[0][3] == DOT_X ||
-                map[0][2] == DOT_X && map[0][3] == DOT_X && map[0][4] == DOT_X) {
-            x = 0;
-            y = 1;
-            map[x][y] = DOT_O;
-        }
-        if (map[0][0] == DOT_X && map[0][1] == DOT_X && map[0][3] == DOT_X ||
-                map[0][1] == DOT_X && map[0][3] == DOT_X && map[0][4] == DOT_X) {
-            x = 0;
+        if (map[1][1] == DOT_X && map[1][3] == DOT_X && map[1][4] == DOT_X ||
+                map[1][3] == DOT_X && map[1][4] == DOT_X && map[1][5] == DOT_X) {
+            x = 1;
             y = 2;
             map[x][y] = DOT_O;
         }
-        if (map[0][0] == DOT_X && map[0][1] == DOT_X && map[0][2] == DOT_X ||
-                map[0][1] == DOT_X && map[0][2] == DOT_X && map[0][4] == DOT_X) {
-            x = 0;
+        if (map[1][1] == DOT_X && map[1][2] == DOT_X && map[1][4] == DOT_X ||
+                map[1][2] == DOT_X && map[1][4] == DOT_X && map[1][5] == DOT_X) {
+            x = 1;
             y = 3;
+            map[x][y] = DOT_O;
+        }
+        if (map[1][1] == DOT_X && map[1][2] == DOT_X && map[1][3] == DOT_X ||
+                map[1][2] == DOT_X && map[1][3] == DOT_X && map[1][5] == DOT_X) {
+            x = 1;
+            y = 4;
             map[x][y] = DOT_O;
         }
         //2
-        if (map[1][1] == DOT_X && map[1][2] == DOT_X && map[1][3] == DOT_X) {
-            if (map[1][0] != DOT_EMPTY) {
-                y = 4;
+        if (map[2][2] == DOT_X && map[2][3] == DOT_X && map[2][4] == DOT_X) {
+            if (map[2][1] != DOT_EMPTY) {
+                y = 5;
             } else {
-                y = 0;
+                y = 1;
             }
-            x = 1;
+            x = 2;
             map[x][y] = DOT_O;
         }
-        if (map[1][0] == DOT_X && map[1][2] == DOT_X && map[1][3] == DOT_X ||
-                map[1][2] == DOT_X && map[1][3] == DOT_X && map[1][4] == DOT_X) {
-            x = 1;
-            y = 1;
-            map[x][y] = DOT_O;
-        }
-        if (map[1][0] == DOT_X && map[1][1] == DOT_X && map[1][2] == DOT_X ||
-                map[1][1] == DOT_X && map[1][3] == DOT_X && map[1][4] == DOT_X) {
-            x = 1;
+        if (map[2][1] == DOT_X && map[2][3] == DOT_X && map[2][4] == DOT_X ||
+                map[2][3] == DOT_X && map[2][4] == DOT_X && map[2][5] == DOT_X) {
+            x = 2;
             y = 2;
             map[x][y] = DOT_O;
         }
-        if (map[1][0] == DOT_X && map[1][1] == DOT_X && map[1][2] == DOT_X ||
-                map[1][1] == DOT_X && map[1][2] == DOT_X && map[1][4] == DOT_X) {
-            x = 1;
+        if (map[2][1] == DOT_X && map[2][2] == DOT_X && map[2][4] == DOT_X ||
+                map[2][2] == DOT_X && map[2][4] == DOT_X && map[2][5] == DOT_X) {
+            x = 2;
             y = 3;
+            map[x][y] = DOT_O;
+        }
+        if (map[2][1] == DOT_X && map[2][2] == DOT_X && map[2][3] == DOT_X ||
+                map[2][2] == DOT_X && map[2][3] == DOT_X && map[2][5] == DOT_X) {
+            x = 2;
+            y = 4;
             map[x][y] = DOT_O;
         }
         //3
-        if (map[2][1] == DOT_X && map[2][2] == DOT_X && map[2][3] == DOT_X) {
-            if (map[2][0] != DOT_EMPTY) {
-                y = 4;
+        if (map[3][2] == DOT_X && map[3][3] == DOT_X && map[3][4] == DOT_X) {
+            if (map[3][1] != DOT_EMPTY) {
+                y = 5;
             } else {
-                y = 0;
+                y = 1;
             }
-            x = 2;
+            x = 3;
             map[x][y] = DOT_O;
         }
-        if (map[2][0] == DOT_X && map[2][2] == DOT_X && map[2][3] == DOT_X ||
-                map[2][2] == DOT_X && map[2][3] == DOT_X && map[2][4] == DOT_X) {
-            x = 2;
-            y = 1;
-            map[x][y] = DOT_O;
-        }
-        if (map[2][0] == DOT_X && map[2][1] == DOT_X && map[2][3] == DOT_X ||
-                map[2][1] == DOT_X && map[2][3] == DOT_X && map[2][4] == DOT_X) {
-            x = 2;
+        if (map[3][1] == DOT_X && map[3][3] == DOT_X && map[3][4] == DOT_X ||
+                map[3][3] == DOT_X && map[3][4] == DOT_X && map[3][5] == DOT_X) {
+            x = 3;
             y = 2;
             map[x][y] = DOT_O;
         }
-        if (map[2][0] == DOT_X && map[2][1] == DOT_X && map[2][2] == DOT_X ||
-                map[2][1] == DOT_X && map[2][2] == DOT_X && map[2][4] == DOT_X) {
-            x = 2;
+        if (map[3][1] == DOT_X && map[3][2] == DOT_X && map[3][4] == DOT_X ||
+                map[3][2] == DOT_X && map[3][4] == DOT_X && map[3][5] == DOT_X) {
+            x = 3;
             y = 3;
+            map[x][y] = DOT_O;
+        }
+        if (map[3][1] == DOT_X && map[3][2] == DOT_X && map[3][3] == DOT_X ||
+                map[3][2] == DOT_X && map[3][3] == DOT_X && map[3][5] == DOT_X) {
+            x = 3;
+            y = 4;
             map[x][y] = DOT_O;
         }
         //4
-        if (map[3][1] == DOT_X && map[3][2] == DOT_X && map[3][3] == DOT_X) {
-            if (map[3][0] != DOT_EMPTY) {
-                y = 4;
+        if (map[4][2] == DOT_X && map[4][3] == DOT_X && map[4][4] == DOT_X) {
+            if (map[4][1] != DOT_EMPTY) {
+                y = 5;
             } else {
-                y = 0;
+                y = 1;
             }
-            x = 3;
+            x = 4;
             map[x][y] = DOT_O;
         }
-        if (map[3][0] == DOT_X && map[3][2] == DOT_X && map[3][3] == DOT_X ||
-                map[3][2] == DOT_X && map[3][3] == DOT_X && map[3][4] == DOT_X) {
-            x = 3;
-            y = 1;
-            map[x][y] = DOT_O;
-        }
-        if (map[3][0] == DOT_X && map[3][1] == DOT_X && map[3][3] == DOT_X ||
-                map[3][1] == DOT_X && map[3][3] == DOT_X && map[3][4] == DOT_X) {
-            x = 3;
+        if (map[4][1] == DOT_X && map[4][3] == DOT_X && map[4][4] == DOT_X ||
+                map[4][3] == DOT_X && map[4][4] == DOT_X && map[4][5] == DOT_X) {
+            x = 4;
             y = 2;
             map[x][y] = DOT_O;
         }
-        if (map[3][0] == DOT_X && map[3][1] == DOT_X && map[3][2] == DOT_X ||
-                map[3][1] == DOT_X && map[3][2] == DOT_X && map[3][4] == DOT_X) {
-            x = 3;
+        if (map[4][1] == DOT_X && map[4][2] == DOT_X && map[4][4] == DOT_X ||
+                map[4][2] == DOT_X && map[4][4] == DOT_X && map[4][5] == DOT_X) {
+            x = 4;
             y = 3;
+            map[x][y] = DOT_O;
+        }
+        if (map[4][1] == DOT_X && map[4][2] == DOT_X && map[4][3] == DOT_X ||
+                map[4][2] == DOT_X && map[4][3] == DOT_X && map[4][5] == DOT_X) {
+            x = 4;
+            y = 4;
             map[x][y] = DOT_O;
         }
         //5
-        if (map[4][1] == DOT_X && map[4][2] == DOT_X && map[4][3] == DOT_X) {
-            if (map[4][0] != DOT_EMPTY) {
-                y = 4;
+        if (map[5][2] == DOT_X && map[5][3] == DOT_X && map[5][4] == DOT_X) {
+            if (map[5][1] != DOT_EMPTY) {
+                y = 5;
             } else {
-                y = 0;
+                y = 1;
             }
-            x = 4;
+            x = 5;
             map[x][y] = DOT_O;
         }
-        if (map[4][0] == DOT_X && map[4][2] == DOT_X && map[4][3] == DOT_X ||
-                map[4][2] == DOT_X && map[4][3] == DOT_X && map[4][4] == DOT_X) {
-            x = 4;
-            y = 1;
-            map[x][y] = DOT_O;
-        }
-        if (map[4][0] == DOT_X && map[4][1] == DOT_X && map[4][3] == DOT_X ||
-                map[4][1] == DOT_X && map[4][3] == DOT_X && map[4][4] == DOT_X) {
-            x = 4;
+        if (map[5][4] == DOT_X && map[5][3] == DOT_X && map[5][4] == DOT_X ||
+                map[5][3] == DOT_X && map[5][4] == DOT_X && map[5][5] == DOT_X) {
+            x = 5;
             y = 2;
             map[x][y] = DOT_O;
         }
-        if (map[4][0] == DOT_X && map[4][1] == DOT_X && map[4][2] == DOT_X ||
-                map[4][1] == DOT_X && map[4][2] == DOT_X && map[4][4] == DOT_X) {
-            x = 4;
+        if (map[5][1] == DOT_X && map[5][2] == DOT_X && map[5][4] == DOT_X ||
+                map[5][2] == DOT_X && map[5][4] == DOT_X && map[5][5] == DOT_X) {
+            x = 5;
             y = 3;
+            map[x][y] = DOT_O;
+        }
+        if (map[5][1] == DOT_X && map[5][2] == DOT_X && map[5][3] == DOT_X ||
+                map[5][2] == DOT_X && map[5][3] == DOT_X && map[5][5] == DOT_X) {
+            x = 5;
+            y = 4;
             map[x][y] = DOT_O;
         }
             else {
@@ -540,18 +542,22 @@ public class TicTacToe {
     //ход человека
     private static void humanTurn() {
         int x, y;
+        System.out.println("Please input dot coordinates, in format x y");
         do {
-            System.out.println("Введите координаты в формате X Y");
-            x = sc.nextInt() - 1;
-            y = sc.nextInt() - 1;
-        } while (!isCellValid(x, y)); // while(isCellValid(x, y) == false)
-        map[y][x] = DOT_X;
+            x = sc.nextInt();
+            y = sc.nextInt();
+        } while (!isCellValid(x - 1, y - 1)); // while(isCellValid(x, y) == false)
+        map[x - 1][y - 1] = DOT_X;
     }
 
     //проверка наличия свободной ячейки в пределах игрового поля
     private static boolean isCellValid(int x, int y) {
-        if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) return false;
-        if (map[y][x] == DOT_EMPTY) return true;
+        if (x < 0 || x > SIZE - 1 || y < 0 || y > SIZE - 1) {
+            return false;
+        }
+        if (map[y][x] == DOT_EMPTY) {
+            return true;
+        }
         return false;
     }
 
@@ -567,17 +573,18 @@ public class TicTacToe {
 
     //вывод карты в консоль
     private static void printMap() {
-        for (int i = 0; i <= SIZE; i++) {
-            System.out.print(i + " ");
+        for (int i = 0; i < SIZE; i++) {
+            System.out.print("  " + (i + 1));
         }
         System.out.println();
         for (int i = 0; i < SIZE; i++) {
-            System.out.print((i + 1) + " ");
+            System.out.print(i + 1 + "");
             for (int j = 0; j < SIZE; j++) {
-                System.out.print(map[i][j] + " ");
+                System.out.print(" " + map[i][j] + " ");
             }
             System.out.println();
         }
         System.out.println();
     }
+
 }
