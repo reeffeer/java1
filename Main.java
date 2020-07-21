@@ -46,7 +46,7 @@ public class Main {
     }
 
     public static void catsEat (Cat[] cats, Plate plate1) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < cats.length; i++) {
             cats[i].eat(plate1);
             System.out.println(cats[i].getName() + " поел.");
             plate1.info();
