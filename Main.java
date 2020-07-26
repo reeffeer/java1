@@ -28,22 +28,21 @@ public class Main {
 
     public static void oneCatEats(Cat[] cats, Plate plate1, int foodCount) {
         Cat oneOfTheCats = cats[0];
-        System.out.println("Аппетит кота " + oneOfTheCats.getName() + ": " + oneOfTheCats.getAppetite());
-        oneOfTheCats.eat(plate1);
-        plate1.info();
-        if (oneOfTheCats.getAppetite() - foodCount <= 0) {
-            oneOfTheCats.setAppetite(0);
-            oneOfTheCats.getFull();
-            System.out.println(true);
-            System.out.println(oneOfTheCats.getName() + " наелся.");
+        System.out.println("Аппетит кота " + oneOfTheCats.getName() + ": " + oneOfTheCats.getAppetite() + ".");
+        oneOfTheCats.eat(plate1); //кот ест или не ест (в методе сказано)
+
+        if (foodCount - oneOfTheCats.getAppetite() >= 0) {//если в тарелке достаточно еды (остается что-то после того, как кот поел, или только-только для утоления голода)
+            oneOfTheCats.full = true; //кот сыт
+            oneOfTheCats.setAppetite(0); //аппетит исчез
+            System.out.println(oneOfTheCats.getName() + " сыт: " + oneOfTheCats.full + ".");
         } else {
-            oneOfTheCats.setAppetite(oneOfTheCats.getAppetite());
-            oneOfTheCats.setFull(0);
-            System.out.println(false);
-            System.out.println(oneOfTheCats.getName() + " не поел.");
+            oneOfTheCats.full = false; //кот голоден
+            oneOfTheCats.setAppetite(oneOfTheCats.getAppetite()); //аппетит остался,
+            System.out.println(oneOfTheCats.getName() + " сыт: " + oneOfTheCats.full + ". " + oneOfTheCats.getName() + " все еще голоден.");
         }
-        System.out.println("Аппетит кота " + oneOfTheCats.getName() + ": " + oneOfTheCats.getAppetite());
+        System.out.println("Аппетит кота " + oneOfTheCats.getName() + ": " + oneOfTheCats.getAppetite() + ".");
     }
+    
 
     public static void catsEat (Cat[] cats, Plate plate1) {
         for (int i = 0; i < cats.length; i++) {
