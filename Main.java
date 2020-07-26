@@ -9,9 +9,9 @@ public class Main {
     public static void main(String[] args) {
 
         Cat[] cats = new Cat[3];
-        cats[0] = new Cat("Moore", 10, 0);
-        cats[1] = new Cat("Mew", 5, 0);
-        cats[2] = new Cat("Tom", 15, 0);
+        cats[0] = new Cat("Moore", 10, false);
+        cats[1] = new Cat("Mew", 5, false);
+        cats[2] = new Cat("Tom", 15, false);
 
         int foodCount = 30;
         Plate plate1 = new Plate(foodCount);
