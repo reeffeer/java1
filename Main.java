@@ -11,18 +11,16 @@ public class Main {
         Cat[] cats = new Cat[3];
         cats[0] = new Cat("Moore", 10, false);
         cats[1] = new Cat("Mew", 5, false);
-        cats[2] = new Cat("Tom", 15, false);
+        cats[2] = new Cat("Tom", 0, false);
 
-        int foodCount = 30;
+        int foodCount = 10;
         Plate plate1 = new Plate(foodCount);
-
-        plate1.info();
-
+        plate1.info(plate1.getFood());
         //вызываем один из методов
         // этот
-        //oneCatEats(cats, plate1, foodCount);
+        oneCatEats(cats, plate1, foodCount);
         //или этот
-        catsEat(cats, plate1);
+        //catsEat(cats, plate1);
 
     }
 
@@ -42,16 +40,22 @@ public class Main {
         }
         System.out.println("Аппетит кота " + oneOfTheCats.getName() + ": " + oneOfTheCats.getAppetite() + ".");
     }
-    
+
 
     public static void catsEat (Cat[] cats, Plate plate1) {
         for (int i = 0; i < cats.length; i++) {
-            cats[i].eat(plate1);
-            System.out.println(cats[i].getName() + " поел.");
-            plate1.info();
+            System.out.println("Аппетит кота " + cats[i].getName() + ": " + cats[i].getAppetite() + ".");
+            System.out.print(cats[i].getName());
+            if (cats[i].getAppetite() == 0) {
+                System.out.println(" не хочет есть.");
+                plate1.info(plate1.getFood());
+            } else if (cats[i].getAppetite() > plate1.getFood()) {
+                cats[i].eat(plate1);
+            } else {
+                cats[i].eat(plate1);
+            }
         }
-        System.out.print("Итого: ");
-        plate1.info();
+
     }
 
 
