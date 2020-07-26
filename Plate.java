@@ -14,12 +14,13 @@ public class Plate {
         System.out.println("На тарелке " + food + " еды.");
     }
 
-    public void decreaseFood(int appetite) { //если аппетит кота больше количества еды, то кот не ест.
-        if (appetite > food) { //Значит, мы игнорируем выполнение задания 2.
-            food = food;
-            System.out.println("Кот не поел, потому что в тарелке недостаточно еды. " + "Аппетит: " + appetite + ".");
+   public void decreaseFood(int appetite) { //если аппетит кота больше количества еды, то кот не ест.
+        if (food < appetite) { //Значит, мы игнорируем выполнение задания 2.
+            System.out.println("Кот не поел. На тарелке недостаточно еды: " + food + ".");
         } else {
             food -= appetite;
+            appetite = 0;
+            System.out.println("Кот поел. На тарелке осталось " + food + " еды.");
         }
     }
 
