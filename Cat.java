@@ -5,9 +5,9 @@ public class Cat {
 
     private String name;
     private int appetite;
-    private int full;
+    public boolean full;
 
-    public Cat(String name, int appetite, int full) {
+    public Cat(String name, int appetite, boolean full) {
         this.name = name;
         this.appetite = appetite;
         this.full = full;
@@ -38,11 +38,5 @@ public class Cat {
     }
 
 
-    public int getFull() {
-        return full;
-    }
-
-    public void setFull(int full) {
-        this.full = full;
-    }
+   
 }
